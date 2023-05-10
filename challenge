@@ -1,0 +1,45 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class MainTest {
+
+    public static void main(String[] args) {
+        int[] coins = {1, 5, 1, 1, 1, 10, 15, 20, 100};
+        Arrays.sort(coins);
+        int solution = firstSolution(coins);
+        System.out.println(solution);
+
+        int[] values = {-10, -5, 0, 5, 10};
+        secondSolution(values);
+        System.out.println(values);
+    }
+
+    private static int firstSolution(int[] coins) {
+        int sum = 0;
+        int hole = 1;
+        for (int index = 0; index < coins.length-1; index++) {
+            int coin = coins[index];
+            sum += coin;
+
+            if ((sum + hole) < coins[index+1]) {
+                return sum+hole;
+            }
+        }
+        return  sum + coins[coins.length-1] + hole;
+    }
+
+
+    private static void secondSolution(int[] values) {
+        boolean negativeValue = false;
+        for (int index = 0; index < values.length; index++) {
+            if (!negativeValue && (values[index] <0)) {
+                negativeValue = true;
+            }
+            values[index] = (int) Math.pow(Double.valueOf(values[index]), 2d);
+        }
+        if (negativeValue) {
+            Arrays.sort(values);
+        }
+    }
+
+}
